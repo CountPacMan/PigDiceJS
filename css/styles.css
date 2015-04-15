@@ -1,0 +1,14 @@
+#user-account,
+#penalty {
+  display: none;
+}
+
+img {
+  width: 25%;
+  height: 25%;
+}
+
+.btn,
+.form-group {
+  display: inline-block;
+}
