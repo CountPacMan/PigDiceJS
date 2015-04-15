@@ -44,9 +44,6 @@ jQuery(document).ready(function() {
       $("#player-turnScore").text(currentPlayer.turnScore);
     }
 
-    printPlayer();
-    $("#game").show();
-
     function changePlayer() {
       currentPlayer.turnScore = 0;
       $("#message").empty();
@@ -61,6 +58,15 @@ jQuery(document).ready(function() {
       $("#player-turnScore").text(currentPlayer.turnScore);
     }
 
+    function winner() {
+      $("#game").hide();
+      $("#winner").text(currentPlayer.name + " is the winner!!!");
+      $("#end").show();
+    }
+
+    printPlayer();
+    $("#game").show();
+
     $("#roll").click(function(event) {
       $("#message").text("");
       var roll = getRoll();
@@ -70,8 +76,11 @@ jQuery(document).ready(function() {
         $(".play").hide();
         $("#ok").show();
       } else {
-        // need to test for win
+        $("#message").text("Rolled a " + roll);
         currentPlayer.addTurnScore(roll);
+        if (currentPlayer.turnScore + currentPlayer.score >= 100) {
+          winner();
+        }
       }
       updateScore();
     });
