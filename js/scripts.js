@@ -24,6 +24,7 @@ jQuery(document).ready(function() {
   $("#p1").focus();
   $("#create-players").submit(function(event) {
     event.preventDefault();
+    $("#create-players").hide();
 
     var name1 = $("#p1").val();
     var player1 = Object.create(Player);
@@ -33,22 +34,33 @@ jQuery(document).ready(function() {
     var player2 = Object.create(Player);
     player2.name = name2;
 
-    $("#player-turn").text(player1.name + "'s turn");
-    $("#player-score").text(player1.score);
-    $("#player-turnScore").text(player1.turnScore);
+    var currentPlayer = player1;
+
+    $("#player-turn").text(currentPlayer.name + "'s turn");
+    $("#player-score").text(currentPlayer.score);
+    $("#player-turnScore").text(currentPlayer.turnScore);
     $("#game").show();
 
     $("#roll").click(function(event) {
+      $("#message").text("");
       var roll = getRoll();
       if (roll === 1) {
-        player1.turnScore = 0;
+        currentPlayer.turnScore = 0;
         // end turn and give message
+        $("#message").text("Rolled a 1! Lose your turn.")
       } else {
-        player1.addTurnScore(roll);
-        player1.addScore();
+        currentPlayer.addTurnScore(roll);
       }
-      $("#player-score").text(player1.score);
-      $("#player-turnScore").text(player1.turnScore);
+      $("#player-score").text(currentPlayer.score);
+      $("#player-turnScore").text(currentPlayer.turnScore);
+    });
+
+    $("#pass").click(function(event) {
+      $("#message").text("Adding turn score to total score...");
+      currentPlayer.addScore();  // still need to test for win
+      $("#player-score").text(currentPlayer.score);
+      $("#player-turnScore").text(currentPlayer.turnScore);
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
     });
   });
 });
