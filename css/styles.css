@@ -1,5 +1,6 @@
 #game,
-#penalty {
+#penalty,
+#ok {
   display: none;
 }
 
@@ -24,4 +25,8 @@ h1 {
 .btn {
   background-color: pink;
   color: #000;
+}
+
+.row {
+  padding-left: 20px;
 }

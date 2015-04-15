@@ -36,31 +36,56 @@ jQuery(document).ready(function() {
 
     var currentPlayer = player1;
 
-    $("#player-turn").text(currentPlayer.name + "'s turn");
-    $("#player-score").text(currentPlayer.score);
-    $("#player-turnScore").text(currentPlayer.turnScore);
+    function printPlayer() {
+      $(".play").show();
+      $("#ok").hide();
+      $("#player-turn").text(currentPlayer.name + "'s turn");
+      $("#player-score").text(currentPlayer.score);
+      $("#player-turnScore").text(currentPlayer.turnScore);
+    }
+
+    printPlayer();
     $("#game").show();
+
+    function changePlayer() {
+      currentPlayer.turnScore = 0;
+      $("#message").empty();
+      $("#player-score").text(currentPlayer.score);
+      $("#player-turnScore").text(currentPlayer.turnScore);
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+      printPlayer();
+    }
+
+    function updateScore() {
+      $("#player-score").text(currentPlayer.score);
+      $("#player-turnScore").text(currentPlayer.turnScore);
+    }
 
     $("#roll").click(function(event) {
       $("#message").text("");
       var roll = getRoll();
       if (roll === 1) {
+        $("#message").text("Rolled a 1! Lose your turn.").addClass("text-danger");
         currentPlayer.turnScore = 0;
-        // end turn and give message
-        $("#message").text("Rolled a 1! Lose your turn.")
+        $(".play").hide();
+        $("#ok").show();
       } else {
+        // need to test for win
         currentPlayer.addTurnScore(roll);
       }
-      $("#player-score").text(currentPlayer.score);
-      $("#player-turnScore").text(currentPlayer.turnScore);
+      updateScore();
     });
 
     $("#pass").click(function(event) {
-      $("#message").text("Adding turn score to total score...");
       currentPlayer.addScore();  // still need to test for win
-      $("#player-score").text(currentPlayer.score);
-      $("#player-turnScore").text(currentPlayer.turnScore);
-      currentPlayer = currentPlayer === player1 ? player2 : player1;
+      updateScore();
+      $("#message").text("Adding turn score to total score...");
+      $(".play").hide();
+      $("#ok").show();
+    });
+
+    $("#ok").click(function() {
+      changePlayer();
     });
   });
 });

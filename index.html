@@ -12,26 +12,29 @@
       <img src="img/roundpig.jpg" alt="round smiley piggie">
       <h1>Pig Dice Game</h1>
       <hr/>
-      <form id="create-players">
-        <div class="form-group">
-          <label for="p1">Player 1 name: </label>
-          <input id="p1" type="text" required>
-        </div>
-        <div class="form-group">
-          <label for="p2">Player 2 name: </label>
-          <input id="p2" type="text" required>
-        </div>
-        <button type="submit" class="btn btn-info">Submit</button>
-      </form>
+      <div class="row">
+        <form id="create-players">
+          <div class="form-group">
+            <label for="p1">Player 1 name: </label>
+            <input id="p1" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="p2">Player 2 name: </label>
+            <input id="p2" type="text" required>
+          </div>
+          <button type="submit" class="btn btn-info">Submit</button>
+        </form>
+      </div>
       <hr/>
       <div id="game">
         <div class="row">
           <h2 id="player-turn"></h2>
-          <h3 id="message" class="text-danger"></h3>
           <h4>Score: <span id="player-score" class="text-success"></span></h4>
           <h4>Turn Score: <span id="player-turnScore" class="text-info"></span></h4>
-          <button class="btn" id="roll">Roll!</button>
-          <button class="btn" id="pass">Pass...</button>
+          <button class="btn play" id="roll">Roll!</button>
+          <button class="btn play" id="pass">Pass...</button>
+          <button class="btn" id="ok">Ok! :D</button>
+          <h3 id="message" class="text-danger"></h3>
         </div>
       </div>
     </div>
