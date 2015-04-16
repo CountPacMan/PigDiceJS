@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
       } else {
         $("#message").text("Rolled a " + roll);
         currentPlayer.addTurnScore(roll);
-        if (currentPlayer.turnScore + currentPlayer.score >= 10) {
+        if (currentPlayer.turnScore + currentPlayer.score >= 100) {
           winner();
         }
       }
